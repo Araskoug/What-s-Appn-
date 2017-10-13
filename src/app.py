@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from flask import Flask, jsonify, request
+import test
+
 app = Flask(__name__)
 
 @app.route("/")
 def login():
     #Användaren loggar in via Facebook
-    return "hej"
+    hej = test.test()
+    return hej
 
 @app.route("/define")
 def defin_search():
