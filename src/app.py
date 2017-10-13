@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 import test
 
 app = Flask(__name__)
@@ -9,7 +9,7 @@ app = Flask(__name__)
 def login():
     #Användaren loggar in via Facebook
     hej = test.test()
-    return hej
+    return render_template("login.html", hej=hej)
 
 @app.route("/define")
 def defin_search():
