@@ -1,0 +1,77 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf830
+{\fonttbl\f0\fnil\fcharset0 Monaco;}
+{\colortbl;\red255\green255\blue255;\red242\green242\blue242;\red0\green0\blue0;\red159\green160\blue28;
+\red180\green36\blue25;}
+{\*\expandedcolortbl;;\csgray\c95825;\csgray\c0\c85000;\cssrgb\c68469\c68013\c14209;
+\cssrgb\c76410\c21699\c12524;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\pardirnatural\partightenfactor0
+
+\f0\fs20 \cf2 \cb3 \CocoaLigature0 Last login: Fri Oct 13 12:25:11 on ttys000\
+Louises-MacBook-Pro:~ Lola$ python3 /Users/Lola/GitHub/What-s-Appn-/src \
+/Library/Frameworks/Python.framework/Versions/3.6/bin/python3: can't find '__main__' module in '/Users/Lola/GitHub/What-s-Appn-/src'\
+Louises-MacBook-Pro:~ Lola$ cd /Users/Lola/GitHub/What-s-Appn-/src \
+Louises-MacBook-Pro:src Lola$ python3 -m venv myenv\
+Louises-MacBook-Pro:src Lola$ cd /Users/Lola/GitHub/What-s-Appn- \
+Louises-MacBook-Pro:What-s-Appn- Lola$ python3 -m venv myenv\
+Louises-MacBook-Pro:What-s-Appn- Lola$ . myenv/bin/activate\
+(myenv) Louises-MacBook-Pro:What-s-Appn- Lola$ pip install -r requirements.txt\
+Collecting flask>=0.12 (from -r requirements.txt (line 1))\
+\cf4   Retrying (Retry(total=4, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x104e058d0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',)': /simple/flask/\cf2 \
+\cf4   Retrying (Retry(total=3, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x104e05a58>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',)': /simple/flask/\cf2 \
+\cf4   Retrying (Retry(total=2, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x104e05e80>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',)': /simple/flask/\cf2 \
+\cf4   Retrying (Retry(total=1, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x104e05ef0>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',)': /simple/flask/\cf2 \
+\cf4   Retrying (Retry(total=0, connect=None, read=None, redirect=None)) after connection broken by 'NewConnectionError('<pip._vendor.requests.packages.urllib3.connection.VerifiedHTTPSConnection object at 0x104e05c88>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known',)': /simple/flask/\cf2 \
+\cf5   Could not find a version that satisfies the requirement flask>=0.12 (from -r requirements.txt (line 1)) (from versions: )\cf2 \
+\cf5 No matching distribution found for flask>=0.12 (from -r requirements.txt (line 1))\cf2 \
+(myenv) Louises-MacBook-Pro:What-s-Appn- Lola$ pip install -r requirements.txt\
+Collecting flask>=0.12 (from -r requirements.txt (line 1))\
+  Using cached Flask-0.12.2-py2.py3-none-any.whl\
+Collecting Jinja2>=2.4 (from flask>=0.12->-r requirements.txt (line 1))\
+  Using cached Jinja2-2.9.6-py2.py3-none-any.whl\
+Collecting click>=2.0 (from flask>=0.12->-r requirements.txt (line 1))\
+  Using cached click-6.7-py2.py3-none-any.whl\
+Collecting itsdangerous>=0.21 (from flask>=0.12->-r requirements.txt (line 1))\
+  Using cached itsdangerous-0.24.tar.gz\
+Collecting Werkzeug>=0.7 (from flask>=0.12->-r requirements.txt (line 1))\
+  Using cached Werkzeug-0.12.2-py2.py3-none-any.whl\
+Collecting MarkupSafe>=0.23 (from Jinja2>=2.4->flask>=0.12->-r requirements.txt (line 1))\
+  Using cached MarkupSafe-1.0.tar.gz\
+Installing collected packages: MarkupSafe, Jinja2, click, itsdangerous, Werkzeug, flask\
+  Running setup.py install for MarkupSafe ... done\
+  Running setup.py install for itsdangerous ... done\
+Successfully installed Jinja2-2.9.6 MarkupSafe-1.0 Werkzeug-0.12.2 click-6.7 flask-0.12.2 itsdangerous-0.24\
+(myenv) Louises-MacBook-Pro:What-s-Appn- Lola$ pip list\
+\cf5 DEPRECATION: The default format will switch to columns in the future. You can use --format=(legacy|columns) (or define a format=(legacy|columns) in your pip.conf under the [list] section) to disable this warning.\cf2 \
+click (6.7)\
+Flask (0.12.2)\
+itsdangerous (0.24)\
+Jinja2 (2.9.6)\
+MarkupSafe (1.0)\
+pip (9.0.1)\
+setuptools (28.8.0)\
+Werkzeug (0.12.2)\
+(myenv) Louises-MacBook-Pro:What-s-Appn- Lola$ export FLASK_APP=src/app.py\
+(myenv) Louises-MacBook-Pro:What-s-Appn- Lola$ flask run\
+ * Serving Flask app "app"\
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\
+[2017-10-13 12:34:47,349] ERROR in app: Exception on / [GET]\
+Traceback (most recent call last):\
+  File "/Users/Lola/GitHub/What-s-Appn-/myenv/lib/python3.6/site-packages/flask/app.py", line 1982, in wsgi_app\
+    response = self.full_dispatch_request()\
+  File "/Users/Lola/GitHub/What-s-Appn-/myenv/lib/python3.6/site-packages/flask/app.py", line 1615, in full_dispatch_request\
+    return self.finalize_request(rv)\
+  File "/Users/Lola/GitHub/What-s-Appn-/myenv/lib/python3.6/site-packages/flask/app.py", line 1630, in finalize_request\
+    response = self.make_response(rv)\
+  File "/Users/Lola/GitHub/What-s-Appn-/myenv/lib/python3.6/site-packages/flask/app.py", line 1725, in make_response\
+    raise ValueError('View function did not return a response')\
+ValueError: View function did not return a response\
+127.0.0.1 - - [13/Oct/2017 12:34:47] "GET / HTTP/1.1" 500 -\
+127.0.0.1 - - [13/Oct/2017 12:34:47] "GET /favicon.ico HTTP/1.1" 404 -\
+flask run\
+^C(myenv) Louises-MacBook-Pro:What-s-Appn- Lola$ flask run\
+ * Serving Flask app "app"\
+ * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)\
+127.0.0.1 - - [13/Oct/2017 12:35:05] "GET / HTTP/1.1" 200 -\
+\
+}
