@@ -1,3 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 body {
-    background-color: greenyellow;
+    padding-top: 20px;
+    background-color: #3eb5ac;
+    font-family: 'Open Sans', sans-serif;
+    color: #28948c;
+}
+html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+section {
+    background-color: #FFFBFA;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 10px auto;
+    box-shadow: 0 0 15px #28948c;
+    min-height: 400px;
+    width: 500px;     
+}
+section h1 {
+    letter-spacing: 3px;
+    text-align: center;
+}
+section form {
+    letter-spacing: 2px;
+    width: 80%;
+    margin:auto;
+    min-height: 160px;
+    box-sizing: border-box;
+}
+input {
+    letter-spacing: 1px;  
+    outline:none;
+    width: 90%;
+    padding: 10px;
+    height:20px;
+    margin: auto;
+}
+button {
+    width: 96%;
+    letter-spacing: 2px;
+    border:2px solid #3eb5ac;
+    outline: none;
+    padding: 10px;
+    margin: 10px auto;
+    font-size: 20px;
+    color:#FFFBFA;
+    overflow: hidden;
+    box-sizing: border-box;
+    cursor:pointer;
+    
+    background: #3eb5ac;
+    -webkit-box-shadow: 0 5px #28948c;
+    box-shadow: 0 5px #28948c;
+    -webkit-transition: border .25s linear, color .25s linear, background-color .25s linear;
+    transition: border .25s linear, color .25s linear, background-color .25s linear;
+}
+button:hover, 
+button:focus {
+    -webkit-box-shadow: 0 3px #28948c;
+    box-shadow: 0 3px #28948c;
+    background: #3eb5ac;
+    top: 2px;
+    position: relative;
+    border:2px solid #62c4bc;
+    box-sizing: border-box;
+}
+button:active {
+    -webkit-box-shadow: 0 0 #28948c;
+    box-shadow: 0 0 #28948c;
+    top: 5px;
+    background: #3eb5ac;
+    border-color: #3eb5ac;
+    border:2px solid #53b9b1;
+    box-sizing: border-box;
+}
+#map {
+    height: 100%;
+}
+#events, #logout{
+    display: none;
 }
