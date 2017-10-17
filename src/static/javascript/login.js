@@ -65,10 +65,11 @@ function buildProfile(user){
 function buildEvents(events){
     let output = `<h3>Latest events</h3>`;
         for(let i in events.data){
-            if(events.data[i].name){
+            if(events.data[i].place){
                 output += `
                 <div>
-                    ${events.data[i].name}
+                    ${events.data[i].name}, 
+                    ${events.data[i].place}
                 </div>
                 `;
             }
