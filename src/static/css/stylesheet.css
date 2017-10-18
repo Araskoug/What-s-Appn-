@@ -15,10 +15,11 @@ section {
     background-color: #FFFBFA;
     padding: 20px;
     box-sizing: border-box;
-    margin: 10px auto;
     box-shadow: 0 0 15px #28948c;
     min-height: 400px;
-    width: 500px;     
+    width: 35%; 
+    float: left;
+    overflow: hidden;
 }
 section h1 {
     letter-spacing: 3px;
@@ -27,16 +28,25 @@ section h1 {
 section form {
     letter-spacing: 2px;
     width: 80%;
-    margin:auto;
+    margin: auto;
     min-height: 160px;
     box-sizing: border-box;
 }
+section article {
+    padding:20px;
+}
+#my_events, #public_events div {
+    padding:15px;
+    margin:5px;
+    background: #fff;
+}
+
 input {
     letter-spacing: 1px;  
-    outline:none;
+    outline: none;
     width: 90%;
     padding: 10px;
-    height:20px;
+    height: 20px;
     margin: auto;
 }
 button {
@@ -79,6 +89,8 @@ button:active {
 }
 #map {
     height: 100%;
+    width: 65%;
+    float:right;
 }
 #events, #logout{
     display: none;

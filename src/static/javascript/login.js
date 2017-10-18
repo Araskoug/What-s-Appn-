@@ -9,6 +9,8 @@ window.fbAsyncInit = function() {
     });
 
     FB.getLoginStatus(function(response) {
+        // HUR LADDAR VI IN PUBLIC EVENTS INNAN ANVÄNDAREN OMBEDS LOGGA IN ?!
+        publicAPI();
         statusChangeCallback(response);
     });
 };
@@ -21,28 +23,22 @@ window.fbAsyncInit = function() {
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
-
 // Ber användaren logga in  - och loggar in 
 function statusChangeCallback(response){
     if(response.status === 'connected'){
         console.log('Logged in and authenticated');
         setElements(true);
-        testAPI();
+        publicAPI();
+        myAPI();
     } else {
         console.log('Not authenticated');
         setElements(false);
+        publicAPI();
     }
 }
 
-// Testar Facebook API
-function testAPI(){
-    FB.api('/me?fields=name,email,events', function(response){
-        if(response && !response.error){
-            //console.log(response)
-            buildProfile(response);
-        }
-    })
-    
+// Hämtar mina Facebook event
+function myAPI(){
     FB.api('/me/events', function(response){
         if(response && !response.error){
             buildEvents(response);
@@ -50,32 +46,74 @@ function testAPI(){
     })
 }
 
-// Hämtar data från Facebook
-function buildProfile(user){
-    let eventList = ` 
-        <h3>${user.name}</h3>
-        <ul class="list-group">
-            <li class="list-group-item">User name: ${user.name}</li>
-        </ul>
-    `;
-    document.getElementById('events').innerHTML = eventList;
+// Hämtar publika events
+function publicAPI(){
+    FB.api('/search?type=event&q=malmö', function(response){
+           if(response && !response.error){
+            buildPublicEvents(response);
+        }
+    })
+}   
+
+// Skapar lista med alla public events
+function buildPublicEvents(events){
+    let output = `<h3>Public Events</h3>`;
+    for(i in events.data){
+        if(events.data[i].name && events.data[i].place && events.data[i].place.location){
+            output += `
+            <div>
+                ${events.data[i].name}, 
+                ${events.data[i].start_time}, 
+                ${events.data[i].place.name},
+                ${events.data[i].place.location.latitude},
+                ${events.data[i].place.location.longitude}
+                
+            </div>
+            `;
+        }
+    }
+    document.getElementById('public_events').innerHTML = output;
 }
+
+// KOD EJ KLAR (VI VILL ATT DEN SKA HÄMTA ALL INFO FRÅN FB EVENTS
+// OCH SKAPA EN DICT SOM KAN SKICKAS TILL MAPS "MAKE MARKERS" typ...)
+
+function buildInfo(events){
+    
+    eventInfo.append({
+                coords:
+                {
+                    lat:events.data[i].location.latitude,   
+                    lng:events.data[i].location.longitude
+                },
+                startTime:events.data[i].start_time,
+                content:
+                {
+                    header:events.data[i].name,
+                    place:events.data[i].place.name,
+                    description:events.data[i].description
+                }
+            });
+}
+
+
 
 // Skapar lista med event  från Facebook (fungerar ej)
 function buildEvents(events){
-    let output = `<h3>Latest events</h3>`;
+    let output = `<h3>My events</h3>`;
         for(let i in events.data){
-            if(events.data[i].place){
+            if(events.data[i].name){
                 output += `
                 <div>
-                    ${events.data[i].name}, 
-                    ${events.data[i].place}
+                    ${events.data[i].name}
                 </div>
                 `;
             }
         }
-    document.getElementById('events').innerHTML = output;
+    document.getElementById('my_events').innerHTML = output;
 }
+
+
 
 // Kontrollerar om användaren är inloggad
 function checkLoginState() {
@@ -88,11 +126,11 @@ function checkLoginState() {
 function setElements(isLoggedIn){
     if(isLoggedIn) {
         document.getElementById('logout').style.display = 'block';
-        document.getElementById('events').style.display = 'block';
+        document.getElementById('my_events').style.display = 'block';
         document.getElementById('fb-btn').style.display = 'none';
     } else {
         document.getElementById('logout').style.display = 'none';
-        document.getElementById('events').style.display = 'none';
+        document.getElementById('my_events').style.display = 'none';
         document.getElementById('fb-btn').style.display = 'block';
     }
 }
