@@ -1,4 +1,3 @@
-
 // Basic application setup
 window.fbAsyncInit = function() {
     FB.init({
@@ -10,8 +9,9 @@ window.fbAsyncInit = function() {
 
     FB.getLoginStatus(function(response) {
         // HUR LADDAR VI IN PUBLIC EVENTS INNAN ANVÄNDAREN OMBEDS LOGGA IN ?!
+        console.log('Not authenticated');
+        setElements(false);
         publicAPI();
-        statusChangeCallback(response);
     });
 };
 
@@ -46,40 +46,50 @@ function myAPI(){
     })
 }
 
+// Global variabel som hämtar all info från evenemangen.
+var event = ''
+
 // Hämtar publika events
 function publicAPI(){
     FB.api('/search?type=event&q=malmö', function(response){
            if(response && !response.error){
-            buildPublicEvents(response);
+            buildPublicEvents(response, addMarkers);
         }
+        return response
     })
 }   
+var eventInfo = []
 
 // Skapar lista med alla public events
-function buildPublicEvents(events){
+function buildPublicEvents(events, done){
+    console.log('Adam Allsing');
     let output = `<h3>Public Events</h3>`;
     for(i in events.data){
         if(events.data[i].name && events.data[i].place && events.data[i].place.location){
+            eventInfo[i] = {
+                name:events.data[i].name,
+                placeName:events.data[i].place.name,
+                city:events.data[i].place.location.city,
+                coords:{lat:events.data[i].place.location.latitude, lng:events.data[i].place.location.longitude}
+            }; 
+                
             output += `
             <div>
-                ${events.data[i].name}, 
-                ${events.data[i].start_time}, 
-                ${events.data[i].place.name},
-                ${events.data[i].place.location.latitude},
-                ${events.data[i].place.location.longitude}
-                
+                ${eventInfo[i].name}
             </div>
             `;
         }
+        
     }
+        
     document.getElementById('public_events').innerHTML = output;
+    done();
 }
 
 // KOD EJ KLAR (VI VILL ATT DEN SKA HÄMTA ALL INFO FRÅN FB EVENTS
 // OCH SKAPA EN DICT SOM KAN SKICKAS TILL MAPS "MAKE MARKERS" typ...)
 
 function buildInfo(events){
-    
     eventInfo.append({
                 coords:
                 {
