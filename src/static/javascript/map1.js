@@ -1,7 +1,5 @@
-
 var map;
 function initMap() {
-    console.log('Nån rolig jävel');
     // map options
     var options = {
         center: {lat: 55.6050, lng: 13.0038},
@@ -31,32 +29,40 @@ function initMap() {
     
 
 function addMarkers() {
-    console.log('Add markers!');
-    // Array of markers
-    var markers = [
-        {
-            coords:{lat: 55.6050, lng: 13.0038},    iconImage:'http://www.myiconfinder.com/uploads/iconsets/256-256-6096188ce806c80cf30dca727fe7c237.png',
-            name:'<h1>Malmö</h1>'
-        },
-        {
-            coords:{lat:55.7047, lng:13.1910}
-        }  
-    ];
-    
     // Loop through markers
     for(i = 0;i < eventInfo.length;i++){
-        addMarker(eventInfo[i]);
-        
+        addMarker(eventInfo[i]);  
     }     
 }
+// Fixar style på text
+function h3styling(text){
+    var startTag = '<h3>';
+    var endTag = '</h3>';
+    var breakLine = '<hr>';
+    var heading = startTag + text + endTag + breakLine;
+    return heading 
+}
+function subtleStyling(text){
+    var startTag = '<p class="subtle">';
+    var endTag = '</p>';
+    var result = startTag + text + endTag;
+    return result
+}
+
+// Add reviews function
+function addReview(props){
+    
+}
+
 
 // Add marker function
 function addMarker(props){
-    console.log('Martin Timell');
     var marker = new google.maps.Marker({
     position:props.coords,
     venue:props.placeName,
-    town:props.city,
+    description:props.dscrp,
+    street:props.street,
+    time:props.startTime,
     map:map, 
     });
     // Check for custom icon
@@ -66,8 +72,15 @@ function addMarker(props){
     }
     // Check content
     if(props.name){
+        var h3name = h3styling(props.name);
+        var street = ''
+        if(props.street){
+            var street = subtleStyling(props.street);
+        }
+        var time = subtleStyling(props.startTime);
+        var infoText = props.dscrp;
         var infoWindow = new google.maps.InfoWindow ({
-            content:props.name
+            content:h3name + infoText + street + time
         });
         marker.addListener('click', function(){
             infoWindow.open(map, marker);

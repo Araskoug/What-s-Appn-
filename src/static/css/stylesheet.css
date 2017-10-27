@@ -16,10 +16,13 @@ section {
     padding: 20px;
     box-sizing: border-box;
     box-shadow: 0 0 15px #28948c;
-    min-height: 400px;
+    height: 100%;
     width: 35%; 
     float: left;
     overflow: hidden;
+}
+#side-section {
+    overflow:scroll !important;
 }
 section h1 {
     letter-spacing: 3px;
@@ -40,7 +43,6 @@ section article {
     margin:5px;
     background: #fff;
 }
-
 input {
     letter-spacing: 1px;  
     outline: none;
@@ -88,6 +90,7 @@ button:active {
     box-sizing: border-box;
 }
 #map {
+    display: flex;
     height: 100%;
     width: 65%;
     float:right;

@@ -47,9 +47,10 @@ function myAPI(){
 }
 
 // Global variabel som hämtar all info från evenemangen.
-var event = ''
+var event = '';
 
-// Hämtar publika events
+
+// Hämtar  events
 function publicAPI(){
     FB.api('/search?type=event&q=malmö', function(response){
            if(response && !response.error){
@@ -57,20 +58,23 @@ function publicAPI(){
         }
         return response
     })
-}   
-var eventInfo = []
+}  
+
+var eventInfo = [];
 
 // Skapar lista med alla public events
 function buildPublicEvents(events, done){
-    console.log('Adam Allsing');
+    // "Done" - gör att funktionen körs synkront
     let output = `<h3>Public Events</h3>`;
     for(i in events.data){
         if(events.data[i].name && events.data[i].place && events.data[i].place.location){
             eventInfo[i] = {
                 name:events.data[i].name,
                 placeName:events.data[i].place.name,
-                city:events.data[i].place.location.city,
-                coords:{lat:events.data[i].place.location.latitude, lng:events.data[i].place.location.longitude}
+                street:events.data[i].place.location.street,
+                startTime:events.data[i].start_time,
+                coords:{lat:events.data[i].place.location.latitude, lng:events.data[i].place.location.longitude},
+                dscrp:events.data[i].description
             }; 
                 
             output += `
