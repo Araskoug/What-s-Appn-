@@ -3,12 +3,16 @@ function initMap() {
     // map options
     var options = {
         center: {lat: 55.6050, lng: 13.0038},
-        zoom: 13
+        zoom: 13,
+        styles: papuportal
+    
     }
     // new map
     map = new google.maps.Map(document.getElementById('map'), options);
     
 }
+
+
     /*
     
     // add marker
@@ -27,6 +31,19 @@ function initMap() {
     
     */
     
+var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+var icons = {
+  parking: {
+    icon: iconBase + 'parking_lot_maps.png'
+  },
+  library: {
+    icon: iconBase + 'library_maps.png'
+  },
+  info: {
+    icon: iconBase + 'info-i_maps.png'
+  }
+};
+
 
 function addMarkers() {
     // Loop through markers
@@ -49,21 +66,23 @@ function subtleStyling(text){
     return result
 }
 
-// Add reviews function
-function addReview(props){
-    
-}
-
-
 // Add marker function
 function addMarker(props){
     var marker = new google.maps.Marker({
-    position:props.coords,
-    venue:props.placeName,
-    description:props.dscrp,
-    street:props.street,
-    time:props.startTime,
-    map:map, 
+        icon: {
+            //url:'../static/img/center_pointer.png',
+            path: google.maps.SymbolPath.CIRCLE,
+            scale:7,
+            strokeColor:'#28948c',
+            strokeWeight:7
+          },
+        animation: google.maps.Animation.DROP,
+        position:props.coords,
+        venue:props.placeName,
+        description:props.dscrp,
+        street:props.street,
+        time:props.startTime,
+        map:map, 
     });
     // Check for custom icon
     if(props.iconImage){
@@ -80,6 +99,8 @@ function addMarker(props){
         var time = subtleStyling(props.startTime);
         var infoText = props.dscrp;
         var infoWindow = new google.maps.InfoWindow ({
+            maxWidth:300,
+            maxHeight:300,
             content:h3name + infoText + street + time
         });
         marker.addListener('click', function(){
