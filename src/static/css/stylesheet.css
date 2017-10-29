@@ -7,10 +7,10 @@ body {
     color: #28948c;
 }
 html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+    height: 100%;
+    margin: 0;
+    padding: 0;
+} 
 section {
     background-color: #FFFBFA;
     padding: 20px;
@@ -20,9 +20,11 @@ section {
     width: 35%; 
     float: left;
     overflow: hidden;
+    box-sizing: border-box;
 }
 #side-section {
     overflow:scroll !important;
+    border-right:3px solid #bbb;
 }
 section h1 {
     letter-spacing: 3px;
@@ -98,3 +100,12 @@ button:active {
 #events, #logout{
     display: none;
 }
+       
+       
+ /*style the info box*/  
+.gm-style .gm-style-iw {
+    //background-color: black;
+ }    
+
+
+
