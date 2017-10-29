@@ -90,27 +90,6 @@ function buildPublicEvents(events, done){
     done();
 }
 
-// KOD EJ KLAR (VI VILL ATT DEN SKA HÄMTA ALL INFO FRÅN FB EVENTS
-// OCH SKAPA EN DICT SOM KAN SKICKAS TILL MAPS "MAKE MARKERS" typ...)
-
-function buildInfo(events){
-    eventInfo.append({
-                coords:
-                {
-                    lat:events.data[i].location.latitude,   
-                    lng:events.data[i].location.longitude
-                },
-                startTime:events.data[i].start_time,
-                content:
-                {
-                    header:events.data[i].name,
-                    place:events.data[i].place.name,
-                    description:events.data[i].description
-                }
-            });
-}
-
-
 
 // Skapar lista med event  från Facebook (fungerar ej)
 function buildEvents(events){

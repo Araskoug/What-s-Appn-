@@ -1,16 +1,40 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
-body {
-    padding-top: 20px;
-    background-color: #3eb5ac;
-    font-family: 'Open Sans', sans-serif;
-    color: #28948c;
-}
 html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 } 
+body {
+    background-color: #3eb5ac;
+    font-family: 'Open Sans', sans-serif;
+    color: #28948c;
+}
+#main-navbar {
+    border-bottom:3px solid #28948c;
+    display: block;
+    height:40px;
+    position:sticky;
+    overflow: hidden;
+}
+#main-navbar ul {
+    list-style:none;
+    padding:0;
+    display:block;
+    box-sizing:border-box;
+    float:left;
+    font-size:12px;
+}
+#main-navbar ul li{
+    float:left;
+    padding: 0 20px;
+}
+#logout {
+    padding:5px;
+    font-size: 10px;
+    margin-top:-5px;
+}
+
 section {
     background-color: #FFFBFA;
     padding: 20px;
@@ -24,7 +48,7 @@ section {
 }
 #side-section {
     overflow:scroll !important;
-    border-right:3px solid #bbb;
+    //border-right:3px solid #bbb;
 }
 section h1 {
     letter-spacing: 3px;
@@ -43,15 +67,15 @@ section article {
 #my_events, #public_events div {
     padding:15px;
     margin:5px;
-    background: #fff;
+    background:#fff;
 }
 input {
-    letter-spacing: 1px;  
-    outline: none;
-    width: 90%;
-    padding: 10px;
-    height: 20px;
-    margin: auto;
+    letter-spacing:1px;  
+    outline:none;
+    width:90%;
+    padding:10px;
+    height:20px;
+    margin:auto;
 }
 button {
     width: 96%;

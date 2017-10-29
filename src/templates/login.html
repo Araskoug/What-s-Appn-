@@ -28,7 +28,7 @@
         
         <!-- Google API Places Library -->
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEnFXz08b2PGzbP37dXJh63kSH328md-Q&libraries=places&callback=initMap"></script>
-
+        
         
         <!--  
         <script src="../static/javascript/events.js" type="text/javascript"></script>
@@ -36,21 +36,29 @@
        
     </head>
     <body>
-        
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEnFXz08b2PGzbP37dXJh63kSH328md-Q&libraries=places&callback=initMap" async defer></script>
+
+        <nav id="main-navbar">
+            <ul>
+                <li>
+                    <!-- Facebook login button -->
+                    <fb:login-button id="fb-btn" scope="public_profile,user_events,rsvp_event" onlogin="checkLoginState();"></fb:login-button>
+                </li>
+                <li><button type="button" id="logout" onclick="logout()">Logout</button></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </nav>
         <section id="side-section">
             <h1>What's Mapped</h1>
             
-            <!-- Facebook login-knapp -->
-            <div id="hoppsan"></div>
-            <fb:login-button 
-                id="fb-btn"
-                scope="public_profile,user_events,rsvp_event"
-                onlogin="checkLoginState();">
-            </fb:login-button>
-            <button type="button" id="logout" onclick="logout()">Logout</button>
+            <div id="event">
+                
+            </div>
+            
             <form>
                 <input type="text" id="city">
-                <button type="submit" id="events-btn">Hämta event</button>
+                <button type="submit" class="events-btn">Hämta event</button>
             </form>
             
             <article id="public_events"></article>
