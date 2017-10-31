@@ -52,7 +52,7 @@ var event = '';
 
 // Hämtar  events
 function publicAPI(){
-    FB.api('/search?type=event&q=malmö', function(response){
+    FB.api('/search?date_format=U&type=event&q=malmö', function(response){
            if(response && !response.error){
             buildPublicEvents(response, addMarkers);
         }
@@ -78,14 +78,12 @@ function buildPublicEvents(events, done){
             }; 
                 
             output += `
-            <div>
+            <div class="event-container">
                 ${eventInfo[i].name}
             </div>
             `;
         }
-        
     }
-        
     document.getElementById('public_events').innerHTML = output;
     done();
 }

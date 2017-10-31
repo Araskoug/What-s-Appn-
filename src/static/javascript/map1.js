@@ -5,97 +5,78 @@ function initMap() {
         center: {lat: 55.6050, lng: 13.0038},
         zoom: 13,
         styles: flatDesign
-    
     }
     // new map
     map = new google.maps.Map(document.getElementById('map'), options);
-    var malmo = {lat: 55.6050, lng: 13.0038};
-    var infowindow = new google.maps.InfoWindow();
+
+    // Kod för att skapa en Service (PLACE)
+    /* 
+    // Search for Malmö Live.
+    var request = {
+        query: "önnestad"
+    };
+    
+    // Skapar Service
     var service = new google.maps.places.PlacesService(map);
-    service.nearbySearch({
-        location: malmo,
-        radius: 500,
-        type: ['store']
-    }, callback);
-  }
+    service.textSearch(request, callback);
+    */
+}
 
-  function callback(results, status) {
-    if (status === google.maps.places.PlacesServiceStatus.OK) {
-      for (var i = 0; i < results.length; i++) {
-        createMarker(results[i]);
-      }
-    }
-  }
-
-  function createMarker(place) {
-    var placeLoc = place.geometry.location;
+// Checks that the PlacesServiceStatus is OK, and adds a marker
+// using the place ID and location from the PlacesService.
+function callback(results, status) {
+  if (status == google.maps.places.PlacesServiceStatus.OK) {
     var marker = new google.maps.Marker({
       map: map,
-      position: place.geometry.location
-    });
-
-    google.maps.event.addListener(marker, 'click', function() {
-      infowindow.setContent(place.name);
-      infowindow.open(map, this);
-    });
-  }
-
-/*
-    // add marker
-    var marker = new google.maps.Marker({
-        position:{lat: 55.6050, lng: 13.0038}, 
-        map:map, icon:'http://www.myiconfinder.com/uploads/iconsets/256-256-6096188ce806c80cf30dca727fe7c237.png'
-    });
-    var infoWindow = new google.maps.InfoWindow ({
-        content: '<h1>Malmö</h1>'
-    });
+      place: {
+        placeId: results[0].place_id,
+        location: results[0].geometry.location
+      }
+    });  
+      var infoWindow = new google.maps.InfoWindow ({
+        maxWidth:300,
+        maxHeight:300,
+        content:results[0].name + results[0].rating
+    }); 
     marker.addListener('click', function(){
         infoWindow.open(map, marker);
+
     });
-*/
-   
+    map.addListener('click', function(){
+        infoWindow.close();
+    });          
+  }
+}
+
+    //google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+function createRequests(places){
+    var requests = [];
+    for(i = 0;i < places.length;i++){
+        requests.push({
+            location:map.getCenter(),
+            radius:'500',
+            query:places[i]
+        });
+    }return requests
+}
+
+
+// Funktion som körs i login.js !!! (publicAPI();)   
 function addMarkers() {
-    var placeIDs = []
+    var placeList = [];
     // Loop through markers
     for(i = 0;i < eventInfo.length;i++){
-        //placeIDs.push(addPlaceID(eventInfo[i]))
         addMarker(eventInfo[i]);
-        //placeIDs.push(addPlaceID(eventInfo[i]));
+        // Adds place name to place list
+        placeList.push(eventInfo[i].placeName);
     }
-}
-
-
-/*  
-
-.---- BAJSKOD HÄR ----.
-
-function addPlaceID(props){
-    var geocoder = new google.maps.Geocoder;
-    //var infowindow = new google.maps.InfoWindow;
-    if(props.coords){
-        geocoder.geocode({'location': props.coords}, function(results, status) {
-            if (status === 'OK') {
-                if (results[0]) {
-                    //map.setZoom(11);
-                    var placeId = results[0].place_id;
-                    //console.log(placeId);
-                } else {
-                    console.log('No results found');
-                }
-            } else {
-                console.log('Geocoder failed due to: ' + status);
-            }
-            console.log(placeId);
-            return placeId
-        });
-    }
-}
-
-*/
-
-function addRating(props){
-    if(props.placeName){
-        
+    var requests = createRequests(placeList);
+    for(i = 0;i < requests.length;i++){
+        var service = new google.maps.places.PlacesService(map);
+        service.textSearch(requests[i], callback);
     }
 }
 
@@ -119,7 +100,6 @@ function infoStyle(text){
     var result = startTag + text + endTag;
     return result
 }
-
 
 // Add marker function
 function addMarker(props){
@@ -156,18 +136,28 @@ function addMarker(props){
         }
         var time = subtleStyling(props.startTime);
         var infoText = props.dscrp;
+        
         var infoWindow = new google.maps.InfoWindow ({
             maxWidth:300,
             maxHeight:300,
             content:infoStyle(h3name + placeName + infoText + street + time)
-        });
+        }); 
         marker.addListener('click', function(){
+            infoWindow.setContent(h3name + placeName + time);
             infoWindow.open(map, marker);
+
         });
         map.addListener('click', function(){
-            infoWindow.close(map, marker);
+            infoWindow.close();
         });
 
     }
 }
+
+
+
+    
+
+
+
 

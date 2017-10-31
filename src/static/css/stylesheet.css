@@ -29,6 +29,13 @@ body {
     float:left;
     padding: 0 20px;
 }
+#main-navbar ul li a {
+    text-decoration: none;
+    color:#fefefe;
+}
+#main-navbar ul li a:hover {
+    color:#fefefe;
+}
 #logout {
     padding:5px;
     font-size: 10px;
@@ -123,13 +130,13 @@ button:active {
 }
 #events, #logout{
     display: none;
-}
-       
-       
+} 
  /*style the info box*/  
 .gm-style .gm-style-iw {
     //background-color: black;
  }    
-
+.event-container {
+    background:blue;
+}
 
 
