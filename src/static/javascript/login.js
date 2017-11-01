@@ -41,14 +41,32 @@ function statusChangeCallback(response){
 function myAPI(){
     FB.api('/me/events', function(response){
         if(response && !response.error){
-            buildEvents(response);
+            buildEvents(response, addMarkers);
+        }
+    })
+}
+
+function coverImg(props){
+    var eventURL = '/' + props.id + '?fields=cover';
+    FB.api(eventURL, function(response){
+        if(response && !response.error){
+            $('#event-img').html('<img src="' + response.cover.source + '" />');
+        }
+    })
+}
+
+function attending(props){
+    var eventURL = '/' + props.id + '/attending';
+    FB.api(eventURL, function(response){
+        if(response && !response.error){
+            $('#attending').html(response);
+            console.log(response);
         }
     })
 }
 
 // Global variabel som hämtar all info från evenemangen.
 var event = '';
-
 
 // Hämtar  events
 function publicAPI(){
@@ -69,6 +87,7 @@ function buildPublicEvents(events, done){
     for(i in events.data){
         if(events.data[i].name && events.data[i].place && events.data[i].place.location){
             eventInfo[i] = {
+                id:events.data[i].id,
                 name:events.data[i].name,
                 placeName:events.data[i].place.name,
                 street:events.data[i].place.location.street,
@@ -76,32 +95,45 @@ function buildPublicEvents(events, done){
                 coords:{lat:events.data[i].place.location.latitude, lng:events.data[i].place.location.longitude},
                 dscrp:events.data[i].description
             }; 
-                
             output += `
-            <div class="event-container">
-                ${eventInfo[i].name}
+            <div id="${eventInfo[i].id}">
+
+                <a href="#">
+                    ${eventInfo[i].name}
+                </a>
             </div>
             `;
         }
     }
-    document.getElementById('public_events').innerHTML = output;
+    $('#public_events').html(output);
+    
     done();
+    
 }
 
 
 // Skapar lista med event  från Facebook (fungerar ej)
-function buildEvents(events){
+function buildEvents(events, done){
     let output = `<h3>My events</h3>`;
-        for(let i in events.data){
-            if(events.data[i].name){
+        for(i in events.data){
+            if(events.data[i].name && events.data[i].place && events.data[i].place.location){
+                eventInfo[i] = {
+                name:events.data[i].name,
+                placeName:events.data[i].place.name,
+                street:events.data[i].place.location.street,
+                startTime:events.data[i].start_time,
+                coords:{lat:events.data[i].place.location.latitude, lng:events.data[i].place.location.longitude},
+                dscrp:events.data[i].description
+            };
                 output += `
                 <div>
-                    ${events.data[i].name}
+                    ${eventInfo[i].name}
                 </div>
                 `;
             }
         }
     document.getElementById('my_events').innerHTML = output;
+    done();
 }
 
 

@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="eng">
     <head>
+        <title>What's Mapped</title>
         <meta charset="utf-8">
          <!-- Laddar in JQUERY -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -31,35 +32,45 @@
     <body>
         <nav id="main-navbar">
             <ul>
+                <li><a href="/">What's Mapped</a></li>
                 <li>
                     <!-- Facebook login button -->
                     <fb:login-button id="fb-btn" scope="public_profile,user_events,rsvp_event" onlogin="checkLoginState();"></fb:login-button>
                 </li>
                 <li><button type="button" id="logout" onclick="logout()">Logout</button></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
+                
             </ul>
         </nav>
+
         <section id="side-section">
-            <h1>What's Mapped</h1>
+            <div id="event-img">
+            
+            </div>
+            <div id="attending"></div>
             
             <div id="event">
-                
+
             </div>
             
+            <div id="place">
+
+            </div>
+
+            <!-- kan användas för att söka efter event eller plats (ej klar) 
             <form>
                 <input type="text" id="city">
                 <button type="submit" class="events-btn">Hämta event</button>
             </form>
+            -->
             
             <article id="public_events"></article>
             <article id="my_events"></article>
-            
+
         </section>
-        
+
         <!-- Karta från GoogleMaps API -->
         <div id="map"></div>
-        
+
         
         
     </body>

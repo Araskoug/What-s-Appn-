@@ -41,7 +41,6 @@ body {
     font-size: 10px;
     margin-top:-5px;
 }
-
 section {
     background-color: #FFFBFA;
     padding: 20px;
@@ -135,8 +134,15 @@ button:active {
 .gm-style .gm-style-iw {
     //background-color: black;
  }    
-.event-container {
-    background:blue;
+#event, #place {
+    padding:15px;
+    margin:5px;
+    background:#fefefe;
+}
+#event-img img{
+    margin:auto;
+    max-width:95%;
+    border:1px solid grey;
 }
 
 
